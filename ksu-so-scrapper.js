@@ -12,19 +12,10 @@ request({
 		request({
 			uri: 'http://ksu.org.mt' + $(this).attr('href')
 		}, function(error, response, body) {
-			var key = 'President: ';
-			var contactIndex = body.indexOf(key);
-			
-			if (contactIndex === -1) {
-				key = 'Secretary General: ';
-				contactIndex = body.indexOf(key);
-			}
+			var $ = cheerio.load(body);
 
-			if (contactIndex !== -1) {
-				//console.log(body.substring(contactIndex + key.length, body.indexOf('<br> E-mail:')));
-			}console.log(contactIndex + " " + body.indexOf('<br>E-mail:'));
-
-			//var $ = cheerio.load(body);
+			var orgInfo = $('p[style="text-align: justify;"]');
+			console.log(orgInfo.children());
 			//console.log($('p span a').text());
 		});
 	});
