@@ -4,19 +4,34 @@ var request = require('request'),
 request({
 	uri: 'http://ksu.org.mt/index.php/representation/student-organisations'
 }, function(error, response, body) {
-	var $ = cheerio.load(body);
+	var $g = cheerio.load(body);
 
-	$('td > a').each(function() {
-		console.log($(this).text().substring(9));
-
+	$g('td > a').each(function(index, org) {
 		request({
-			uri: 'http://ksu.org.mt' + $(this).attr('href')
+			uri: 'http://ksu.org.mt' + $g(this).attr('href')
 		}, function(error, response, body) {
-			var $ = cheerio.load(body);
+			console.log($g(org).text().substring(9));
 
-			var orgInfo = $('p[style="text-align: justify;"]');
-			console.log(orgInfo.children());
-			//console.log($('p span a').text());
+			var contactPersonIndex = body.indexOf('President:');
+			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Secretary General:') : contactPersonIndex);
+
+			if (contactPersonIndex !== -1) {
+				console.log(body.substring(contactPersonIndex, body.indexOf('<br', contactPersonIndex)));
+			}
+
+			var emailIndex = body.indexOf('Email:') + 7;
+			
+			//7 + -1
+			if (emailIndex !== 6) {
+				console.log(body.substring(emailIndex, body.indexOf('<br', emailIndex)));
+			}
+
+			var websiteIndex = body.indexOf('Website:') + 9;
+
+			//9 + -1
+			if (websiteIndex !== 8) {
+				console.log(body.substring(websiteIndex, body.indexOf('<br', websiteIndex)));
+			}
 		});
 	});
 });
