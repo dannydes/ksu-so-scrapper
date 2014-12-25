@@ -19,15 +19,12 @@ request({
 				console.log(body.substring(contactPersonIndex, body.indexOf('<br', contactPersonIndex)));
 			}
 
-			var emailIndex = body.indexOf('Email:') + 7;
-			
-			//7 + -1
-			if (emailIndex !== 6) {
-				console.log(body.substring(emailIndex, body.indexOf('<br', emailIndex)));
-			}
-
 			var $ = cheerio.load(body);
-			console.log($('a[target=blank]').attr('href'));
+			var email = $('a').filter(function(index, a) {
+				return /mailto/.test($(a).attr('href'));
+			}).text();
+			console.log(email);
+			console.log($('p > a[target=_blank]').attr('href'));
 		});
 	});
 });
