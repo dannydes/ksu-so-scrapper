@@ -26,12 +26,8 @@ request({
 				console.log(body.substring(emailIndex, body.indexOf('<br', emailIndex)));
 			}
 
-			var websiteIndex = body.indexOf('Website:') + 9;
-
-			//9 + -1
-			if (websiteIndex !== 8) {
-				console.log(body.substring(websiteIndex, body.indexOf('<br', websiteIndex)));
-			}
+			var $ = cheerio.load(body);
+			console.log($('a[target=blank]').attr('href'));
 		});
 	});
 });
