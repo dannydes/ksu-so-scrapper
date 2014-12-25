@@ -20,10 +20,11 @@ request({
 			}
 
 			var $ = cheerio.load(body);
-			var email = $('a').filter(function(index, a) {
-				return /mailto/.test($(a).attr('href'));
-			}).text();
-			console.log(email);
+
+			//Print email
+			console.log($('p span a').text());
+			
+			//Print website
 			console.log($('p > a[target=_blank]').attr('href'));
 		});
 	});
