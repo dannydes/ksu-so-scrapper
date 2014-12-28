@@ -14,7 +14,7 @@ request({
 				return;
 			}
 
-			console.log($g(org).text().substring(9));
+			console.log($g(org).text().trim());
 
 			var contactPersonIndex = body.indexOf('President:');
 			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Secretary General:') : contactPersonIndex);
