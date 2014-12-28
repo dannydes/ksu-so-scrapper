@@ -18,6 +18,7 @@ request({
 
 			var contactPersonIndex = body.indexOf('President:');
 			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Secretary General:') : contactPersonIndex);
+			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Chairperson:') : contactPersonIndex);
 
 			if (contactPersonIndex !== -1) {
 				console.log(body.substring(contactPersonIndex, body.indexOf('<br', contactPersonIndex)));
@@ -33,7 +34,14 @@ request({
 			}
 
 			//Print website
-			console.log($('p > a[target=_blank]').attr('href'));
+			var website = $('p > a[target=_blank]').filter(function() {
+				var URL = $(this).attr('href');
+				return URL !== 'https://www.hsbc.com.mt/1/2/mt/yes4' && URL !== 'http://www.bay.com.mt' &&
+					URL !== 'http://www.publictransport.com.mt' && URL !== 'http://www.toyota.com.mt';
+			}).attr('href');
+			if (website) {
+				console.log(website);
+			}
 		});
 	});
 });
