@@ -42,6 +42,8 @@ request({
 			if (website) {
 				console.log(website);
 			}
+
+			console.log('\n');
 		});
 	});
 });
