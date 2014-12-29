@@ -20,6 +20,7 @@ request({
 			var contactPersonIndex = body.indexOf('President:');
 			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Secretary General:') : contactPersonIndex);
 			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Chairperson:') : contactPersonIndex);
+			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('PRO:') : contactPersonIndex);
 
 			if (contactPersonIndex !== -1) {
 				console.log(body.substring(contactPersonIndex, body.indexOf('<br', contactPersonIndex)));
