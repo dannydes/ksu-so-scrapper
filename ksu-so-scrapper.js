@@ -38,6 +38,12 @@ request({
 				console.log($(this).attr('href'));
 			});
 
+			//Print mobile no (if specified)
+			var mobileNoIndex = body.indexOf('Mobile:');
+			if (mobileNoIndex !== -1) {
+				console.log(body.substring(mobileNoIndex, body.indexOf('<br', mobileNoIndex)));
+			}
+
 			//Placeholder for email extraction
 
 			console.log('\n');
