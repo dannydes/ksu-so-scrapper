@@ -11,6 +11,7 @@ request({
 			uri: 'http://ksu.org.mt' + $g(this).attr('href')
 		}, function(error, response, body) {
 			if (error || response.statusCode !== 200) {
+				console.log('Problem fetching org!\n');
 				return;
 			}
 
@@ -25,23 +26,18 @@ request({
 			}
 
 			var $ = cheerio.load(body);
-			
-			//Print email
-			var mailtoLinkIndex = body.indexOf('mailto:');
-			if (mailtoLinkIndex !== -1) {
-				mailtoLinkIndex += 7;
-				console.log(body.substring(mailtoLinkIndex, body.indexOf('"', mailtoLinkIndex)));
-			}
 
-			//Print website
-			var website = $('p > a[target=_blank]').filter(function() {
+			//Print website and social media links
+			var websites = $('div[itemprop=articleBody] a').filter(function() {
 				var URL = $(this).attr('href');
 				return URL !== 'https://www.hsbc.com.mt/1/2/mt/yes4' && URL !== 'http://www.bay.com.mt' &&
 					URL !== 'http://www.publictransport.com.mt' && URL !== 'http://www.toyota.com.mt';
-			}).attr('href');
-			if (website) {
-				console.log(website);
-			}
+			});
+			websites.each(function() {
+				console.log($(this).attr('href'));
+			});
+
+			//Placeholder for email extraction
 
 			console.log('\n');
 		});
