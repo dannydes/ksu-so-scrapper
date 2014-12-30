@@ -55,6 +55,10 @@ request({
 			var websites = $('div[itemprop=articleBody] a');
 			websites.each(function() {
 				var site = $(this).attr('href');
+				if (site.substring(0, 7) === 'mailto:') {
+					return;
+				}
+
 				console.log(site);
 				organisationsFileString += ',' + site;
 			});
