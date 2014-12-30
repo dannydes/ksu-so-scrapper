@@ -45,7 +45,13 @@ request({
 			emailAppendingScript = emailAppendingScript.replace(/document.getElementById/g, '$');
 			emailAppendingScript = emailAppendingScript.replace(/\('cloak/g, '(\'#cloak');
 			emailAppendingScript = emailAppendingScript.replace(/innerHTML = ''/, 'html(\'\')');
-			console.log(emailAppendingScript);
+			emailAppendingScript = emailAppendingScript.replace(/innerHTML \+= /, 'html(');
+			var indexOfLastQuote = emailAppendingScript.lastIndexOf('\'') + 1;
+			emailAppendingScript = emailAppendingScript.substring(0, indexOfLastQuote) + ')' + emailAppendingScript.substring(indexOfLastQuote+1);
+
+			eval(emailAppendingScript);
+			var email = $('div[itemprop=articleBody] span > a').text();
+			console.log(email);
 
 			console.log('\n');
 		});
