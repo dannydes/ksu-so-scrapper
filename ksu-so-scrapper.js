@@ -40,7 +40,8 @@ request({
 				console.log(body.substring(mobileNoIndex, body.indexOf('<br', mobileNoIndex)));
 			}
 
-			//Placeholder for email extraction
+			//Print email
+			var emailAppendingScript = $('div[itemprop=articleBody] script').html();
 
 			console.log('\n');
 		});
