@@ -42,6 +42,10 @@ request({
 
 			//Print email
 			var emailAppendingScript = $('div[itemprop=articleBody] script').html();
+			emailAppendingScript = emailAppendingScript.replace(/document.getElementById/g, '$');
+			emailAppendingScript = emailAppendingScript.replace(/\('cloak/g, '(\'#cloak');
+			emailAppendingScript = emailAppendingScript.replace(/innerHTML = ''/, 'html(\'\')');
+			console.log(emailAppendingScript);
 
 			console.log('\n');
 		});
