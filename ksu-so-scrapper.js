@@ -6,9 +6,10 @@ request({
 	uri: 'http://ksu.org.mt/index.php/representation/student-organisations'
 }, function(error, response, body) {
 	var $g = cheerio.load(body),
-		organisationsFileString = '';
+		organisationsFileString = '',
+		organisations = $g('td > a');
 
-	$g('td > a').each(function(index, org) {
+	organisations.each(function(index, org) {
 		request({
 			uri: 'http://ksu.org.mt' + $g(this).attr('href')
 		}, function(error, response, body) {
@@ -69,14 +70,16 @@ request({
 			organisationsFileString += ';\n';
 
 			console.log('\n');
+
+			if (index === organisations.length - 1) {
+				fs.writeFile('organisations.csv', organisationsFileString, function(error) {
+					if (error) {
+						throw error;
+					}
+
+					console.log('Successfully downloaded to organisations.csv!');
+				});
+			}
 		});
-	});
-
-	fs.writeFile('organisations.csv', organisationsFileString, function(error) {
-		if (error) {
-			throw error;
-		}
-
-		console.log('Successfully downloaded to organisations.csv!');
 	});
 });
