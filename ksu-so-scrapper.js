@@ -29,11 +29,7 @@ request({
 			var $ = cheerio.load(body);
 
 			//Print website and social media links
-			var websites = $('div[itemprop=articleBody] a').filter(function() {
-				var URL = $(this).attr('href');
-				return URL !== 'https://www.hsbc.com.mt/1/2/mt/yes4' && URL !== 'http://www.bay.com.mt' &&
-					URL !== 'http://www.publictransport.com.mt' && URL !== 'http://www.toyota.com.mt';
-			});
+			var websites = $('div[itemprop=articleBody] a');
 			websites.each(function() {
 				console.log($(this).attr('href'));
 			});
