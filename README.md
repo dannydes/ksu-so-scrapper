@@ -19,3 +19,9 @@ Windows users with no clue of what NPM is, may get away with double clicking `` 
 Open your CLI, navigate to the repo's directory and enter `` node ksu-so-scrapper ``.
 
 Windows users can simply run `` appstart.bat `` in the repo's root directory.
+
+## Enjoy
+If you get a positive notification like this after running:
+`` Successfully downloaded to organisations.csv! ``
+and you have followed all instructions here, you should find the details in `` organisations.csv ``,
+under the root folder. Feel free to open the file using your favorite spreadsheet application. :)
