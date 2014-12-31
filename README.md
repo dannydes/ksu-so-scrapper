@@ -26,3 +26,8 @@ If you get a positive notification like this after running:
 `` Successfully downloaded to organisations.csv! ``
 and you have followed all instructions here, you should find the details in `` organisations.csv ``,
 under the root folder. Feel free to open the file using your favorite spreadsheet application. :)
+
+**N.B.:** In the rare case, you get all details for an organisation in one cell or some other odd placement of 
+information, please make sure the following delimiters are set:
+* **,**: used in between organisation details
+* **;**: used in between organisations
