@@ -8,7 +8,8 @@ Student organisation contact details in one place! :)
 * Cheerio
 
 ## Setup
-First download and install NodeJS and NPM for your OS and then install Cheerio using `` npm install cheerio ``.
+First download and install NodeJS and NPM for your OS through http://nodejs.org/download/. Then install Cheerio 
+using `` npm install cheerio ``.
 
 You also need to clone this repo, using `` git clone https://github.com/dannydes/ksu-so-scrapper `` or download 
 and extract from [here](https://github.com/ictsamalta/ksu-so-scrapper/archive/master.zip).
