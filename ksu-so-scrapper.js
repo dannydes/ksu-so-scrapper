@@ -78,8 +78,6 @@ request({
 				if (error) {
 					throw error;
 				}
-
-				console.log('Successfully downloaded to organisations.csv!');
 			});
 		});
 	});
