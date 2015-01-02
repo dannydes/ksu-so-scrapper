@@ -1,1 +1,1 @@
-npm install cheerio
+npm install request && npm install cheerio
