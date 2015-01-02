@@ -2,6 +2,8 @@ var request = require('request'),
 	cheerio = require('cheerio'),
 	fs = require('fs');
 
+fs.renameSync('organisations.csv', 'organisations.csv.bak');
+
 request({
 	uri: 'http://ksu.org.mt/index.php/representation/student-organisations'
 }, function(error, response, body) {
