@@ -6,7 +6,6 @@ request({
 	uri: 'http://ksu.org.mt/index.php/representation/student-organisations'
 }, function(error, response, body) {
 	var $g = cheerio.load(body),
-		organisationsFileString = '',
 		organisations = $g('td > a');
 
 	organisations.each(function(index, org) {
@@ -20,7 +19,7 @@ request({
 
 			var organizationName = $g(org).text().trim();
 			console.log(organizationName);
-			organisationsFileString += organizationName;
+			var organisationFileString = organizationName;
 
 			var contactPersonIndex = body.indexOf('President:');
 			contactPersonIndex = (contactPersonIndex === -1 ? body.indexOf('Secretary General:') : contactPersonIndex);
@@ -30,7 +29,7 @@ request({
 			if (contactPersonIndex !== -1) {
 				var contactPerson = body.substring(contactPersonIndex, body.indexOf('<br', contactPersonIndex));
 				console.log(contactPerson);
-				organisationsFileString += ',' + contactPerson;
+				organisationFileString += ',' + contactPerson;
 			}
 
 			var $ = cheerio.load(body);
@@ -48,7 +47,7 @@ request({
 				eval(emailAppendingScript);
 				var email = $('div[itemprop=articleBody] span > a').text();
 				console.log(email);
-				organisationsFileString += ',' + email;
+				organisationFileString += ',' + email;
 			}
 
 			//Print website and social media links
@@ -60,7 +59,7 @@ request({
 				}
 
 				console.log(site);
-				organisationsFileString += ',' + site;
+				organisationFileString += ',' + site;
 			});
 
 			//Print mobile no (if specified)
@@ -68,22 +67,20 @@ request({
 			if (mobileNoIndex !== -1) {
 				var mobileNo = body.substring(mobileNoIndex, body.indexOf('<br', mobileNoIndex));
 				console.log(mobileNo);
-				organisationsFileString += ',' + mobileNo;
+				organisationFileString += ',' + mobileNo;
 			}
 
-			organisationsFileString += ';\n';
+			organisationFileString += ';\n';
 
 			console.log('\n');
 
-			if (index === organisations.length - 1) {
-				fs.writeFile('organisations.csv', organisationsFileString, function(error) {
-					if (error) {
-						throw error;
-					}
+			fs.appendFile('organisations.csv', organisationFileString, function(error) {
+				if (error) {
+					throw error;
+				}
 
-					console.log('Successfully downloaded to organisations.csv!');
-				});
-			}
+				console.log('Successfully downloaded to organisations.csv!');
+			});
 		});
 	});
 });
