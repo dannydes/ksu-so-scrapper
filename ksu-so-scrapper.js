@@ -4,6 +4,7 @@ var request = require('request'),
 
 if (fs.existsSync('organisations.csv')) {
   fs.renameSync('organisations.csv', 'organisations.csv.bak');
+  console.log('Backup file created!\n');
 }
 
 request({
@@ -85,4 +86,6 @@ request({
 			});
 		});
 	});
+	
+	console.log('Waiting to start download...\n');
 });
