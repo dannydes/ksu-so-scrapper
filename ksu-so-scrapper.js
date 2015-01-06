@@ -16,9 +16,12 @@ request({
 	organisations.each(function(index, org) {
 		request({
 			uri: 'http://ksu.org.mt' + $g(this).attr('href')
-		}, function(error, response, body) {
+		}, function processOrg(error, response, body) {
 			if (error) {
 				console.log('Problem fetching org!\n');
+				request({
+					'uri': 'http://ksu.org.mt' + $g(org).attr('href')
+				}, processOrg);
 				return;
 			}
 
