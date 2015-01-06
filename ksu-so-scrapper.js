@@ -2,25 +2,27 @@ var request = require('request'),
 	cheerio = require('cheerio'),
 	fs = require('fs');
 
+const domain = 'http://ksu.org.mt';
+
 if (fs.existsSync('organisations.csv')) {
   fs.renameSync('organisations.csv', 'organisations.csv.bak');
   console.log('Backup file created!\n');
 }
 
 request({
-	uri: 'http://ksu.org.mt/index.php/representation/student-organisations'
+	uri: domain + '/index.php/representation/student-organisations'
 }, function(error, response, body) {
 	var $g = cheerio.load(body),
 		organisations = $g('td > a');
 
 	organisations.each(function(index, org) {
 		request({
-			uri: 'http://ksu.org.mt' + $g(this).attr('href')
+			uri: domain + $g(this).attr('href')
 		}, function processOrg(error, response, body) {
 			if (error) {
 				console.log('Problem fetching org!\n');
 				request({
-					'uri': 'http://ksu.org.mt' + $g(org).attr('href')
+					'uri': domain + $g(org).attr('href')
 				}, processOrg);
 				return;
 			}
