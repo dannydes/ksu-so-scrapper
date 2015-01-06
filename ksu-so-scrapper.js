@@ -3,9 +3,10 @@ var request = require('request'),
 	fs = require('fs');
 
 const domain = 'http://ksu.org.mt';
+const fileName = 'webroot/organisations.csv';
 
-if (fs.existsSync('organisations.csv')) {
-  fs.renameSync('organisations.csv', 'organisations.csv.bak');
+if (fs.existsSync(fileName)) {
+  fs.renameSync(fileName, fileName + '.bak');
   console.log('Backup file created!\n');
 }
 
@@ -84,7 +85,7 @@ request({
 
 			console.log('\n');
 
-			fs.appendFile('organisations.csv', organisationFileString, function(error) {
+			fs.appendFile(fileName, organisationFileString, function(error) {
 				if (error) {
 					throw error;
 				}
