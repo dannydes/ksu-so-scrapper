@@ -46,7 +46,7 @@ request({
 			var $ = cheerio.load(body);
 
 			//Print email
-			var emailAppendingScript = $('div[itemprop=articleBody] script').html();
+			var emailAppendingScript = $('div[itemprop=articleBody] script').text();
 			if (emailAppendingScript) {
 				emailAppendingScript = emailAppendingScript.replace(/document.getElementById/g, '$');
 				emailAppendingScript = emailAppendingScript.replace(/\('cloak/g, '(\'#cloak');
