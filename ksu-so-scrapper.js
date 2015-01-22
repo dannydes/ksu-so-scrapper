@@ -81,7 +81,7 @@ request({
 				organisationFileString += ',' + mobileNo;
 			}
 
-			organisationFileString += ';\n';
+			organisationFileString += '\n';
 
 			console.log('\n');
 
